@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import { Link, useParams } from "react-router-dom";
 import { readDeck, readCard, updateCard } from "../utils/api/index";
 import { HomeFillIcon } from "@primer/octicons-react";
 
 function EditCard() {
-  const [card, setCard] = useState({});
-  const [deck, setDeck] = useState({});
+  const [cardFront, setCardFront] = useState("");
+  const [cardBack, setCardBack] = useState("");
+  const [cardLoading, setCardLoading] = useState(false);
+  const [deck, setDeck] = useState();
   const { deckId, cardId } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
-    return getDeck(deckId);
+    const abortController = new AbortController();
+    getDeck(deckId, abortController);
+    return () => abortController.abort();
   }, [deckId]);
 
-  async function getDeck(deckId) {
-    const abortController = new AbortController();
+  async function getDeck(deckId, abortController) {
     let response = await readDeck(deckId, abortController.signal);
     setDeck(response);
-    return () => abortController.abort();
   }
 
   useEffect(() => {
@@ -26,60 +30,83 @@ function EditCard() {
   }, [cardId]);
 
   async function getCard(cardId, abortController) {
-    let response = await readCard(cardId, abortController.signal);
-    setCard(response);
+    setCardLoading(true);
+    const { front, back } = await readCard(cardId, abortController.signal);
+    setCardFront(front);
+    setCardBack(back);
+    setCardLoading(false);
   }
-
-  console.log(card);
 
   async function submitCard(e) {
     e.preventDefault();
     const card = {
-      front: e.target.front.value,
-      back: e.target.back.value,
+      deckId,
+      id: cardId,
+      front: cardFront,
+      back: cardBack,
     };
     await updateCard(card);
+    history.push(`/decks/${deckId}`);
   }
+
+  if (cardLoading) return <p>Loading...</p>;
+
   return (
     <div>
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
             <Link to="/">
               <HomeFillIcon size={16} />
               Home
             </Link>
           </li>
-          <li class="breadcrumb-item">
-            <Link to={`/decks/${deckId}`}>Deck {deck.name}</Link>
+          <li className="breadcrumb-item">
+            <Link to={`/decks/${deckId}`}>Deck {deck?.name}</Link>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li className="breadcrumb-item active" aria-current="page">
             Edit Card {cardId}
           </li>
         </ol>
       </nav>
       <h1> Edit Card</h1>
       <form onSubmit={submitCard}>
-        <div class="mb-3">
-          <label for="name" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
             Front
           </label>
-          <textarea class="form-control" name="front" id="front" rows="3">
-            {card.front}
+          <textarea
+            className="form-control"
+            name="front"
+            id="front"
+            rows="3"
+            onChange={(e) => setCardFront(e.target.value)}
+          >
+            {cardFront}
           </textarea>
         </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="description" className="form-label">
             Back
           </label>
-          <textarea class="form-control" name="back" id="back" rows="3">
-            {card.back}
+          <textarea
+            className="form-control"
+            name="back"
+            id="back"
+            rows="3"
+            onChange={(e) => setCardBack(e.target.value)}
+          >
+            {cardBack}
           </textarea>
         </div>
-        <Link to="/" type="button" class="btn btn-secondary">
+        <Link
+          to={`/decks/${deckId}`}
+          type="button"
+          className="btn btn-secondary"
+        >
           Cancel
         </Link>
-        <button class="btn btn-primary" style={{ margin: "10px" }}>
+        <button className="btn btn-primary" style={{ margin: "10px" }}>
           Submit
         </button>
       </form>

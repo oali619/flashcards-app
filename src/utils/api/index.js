@@ -54,7 +54,6 @@ async function fetchJson(url, options, onCancel) {
     }
 
     return await response.json();
-
   } catch (error) {
     if (error.name !== "AbortError") {
       console.error(error.stack);
@@ -208,6 +207,7 @@ export async function readCard(cardId, signal) {
  *  a promise that resolves to the updated card.
  */
 export async function updateCard(updatedCard, signal) {
+  updatedCard.deckId = Number(updatedCard.deckId);
   const url = `${API_BASE_URL}/cards/${updatedCard.id}`;
   const options = {
     method: "PUT",

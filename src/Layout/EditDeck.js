@@ -21,10 +21,11 @@ function EditDeck() {
 
   async function updatedDeck(e) {
     e.preventDefault();
+    const formData = new FormData(e.target);
     const deck = {
       id: deckId,
-      name: e.target.name.value,
-      description: e.target.description.value,
+      name: formData.get("name"),
+      description: formData.get("description"),
     };
     try {
       await updateDeck(deck);
@@ -39,17 +40,17 @@ function EditDeck() {
       {deck && (
         <div>
           <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
                 <Link to="/">
                   <HomeFillIcon size={16} />
                   Home
                 </Link>
               </li>
-              <li class="breadcrumb-item ">
+              <li className="breadcrumb-item ">
                 <Link to={`/decks/${deckId}`}>{deck.name}</Link>
               </li>
-              <li class="breadcrumb-item active" aria-current="page">
+              <li className="breadcrumb-item active" aria-current="page">
                 Edit Deck
               </li>
             </ol>
@@ -57,36 +58,45 @@ function EditDeck() {
 
           <h1>Edit Deck</h1>
           <form onSubmit={updatedDeck}>
-            <div class="mb-3">
-              <label for="name" class="form-label">
+            <div className="mb-3">
+              <label hmtlFor="name" className="form-label">
                 Name
               </label>
               {/* <input
             type="text"
-            class="form-control"
+            className="form-control"
             name="name"
             id="name"
             placeholder="Deck Name"
             required
           >{deck.name}</input> */}
-              <textarea class="form-control" name="front" id="front" rows="3">
+              <textarea className="form-control" name="name" id="name" rows="3">
                 {deck.name}
               </textarea>
             </div>
-            <div class="mb-3">
-              <label for="description" class="form-label">
+            <div className="mb-3">
+              <label htmlFor="description" className="form-label">
                 Description
               </label>
-              <textarea class="form-control" name="back" id="back" rows="3">
+              <textarea
+                className="form-control"
+                name="description"
+                id="description"
+                rows="3"
+              >
                 {deck.description}
               </textarea>
             </div>
-            <Link to="/" type="button" class="btn btn-secondary">
+            <Link
+              to={`/decks/${deckId}`}
+              type="button"
+              className="btn btn-secondary"
+            >
               Cancel
             </Link>
             <button
               type="submit"
-              class="btn btn-primary"
+              className="btn btn-primary"
               style={{ margin: "10px" }}
             >
               Submit

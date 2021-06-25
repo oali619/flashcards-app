@@ -41,29 +41,29 @@ function AddCards() {
   return (
     <div>
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
             <Link to="/">
               <HomeFillIcon size={16} />
               Home
             </Link>
           </li>
-          <li class="breadcrumb-item">
+          <li className="breadcrumb-item">
             <Link to={`/decks/${deckId}`}>{deck.name}</Link>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li className="breadcrumb-item active" aria-current="page">
             Add Card
           </li>
         </ol>
       </nav>
       <h2> {deck.name}: Add Card</h2>
       <form id="addCard" onSubmit={submitCard}>
-        <div class="mb-3">
-          <label for="name" class="form-label">
+        <div className="mb-3">
+          <label for="name" className="form-label">
             Front
           </label>
           <textarea
-            class="form-control"
+            className="form-control"
             name="front"
             id="front"
             placeholder="Front side of card"
@@ -71,12 +71,12 @@ function AddCards() {
             onChange={(e) => setCardFront(e.target.value)}
           ></textarea>
         </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">
+        <div className="mb-3">
+          <label for="description" className="form-label">
             Back
           </label>
           <textarea
-            class="form-control"
+            className="form-control"
             name="back"
             id="back"
             placeholder="Back side of card"
@@ -84,10 +84,14 @@ function AddCards() {
             onChange={(e) => setCardBack(e.target.value)}
           ></textarea>
         </div>
-        <Link to={`/decks/${deckId}`} type="button" class="btn btn-secondary">
+        <Link
+          to={`/decks/${deckId}`}
+          type="button"
+          className="btn btn-secondary"
+        >
           Done
         </Link>
-        <button class="btn btn-primary" style={{ margin: "10px" }}>
+        <button className="btn btn-primary" style={{ margin: "10px" }}>
           Save
         </button>
       </form>

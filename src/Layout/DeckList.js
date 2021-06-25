@@ -25,24 +25,24 @@ function DeckList() {
 
   return decks.map((deck) => {
     return (
-      <div class="card" style={{ width: "auto" }}>
-        <div class="card-body">
-          <h5 class="card-title">{deck.name}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
+      <div key={deck.id} className="card" style={{ width: "auto" }}>
+        <div className="card-body">
+          <h5 className="card-title">{deck.name}</h5>
+          <h6 className="card-subtitle mb-2 text-muted">
             {deck.cards.length} cards
           </h6>
-          <p class="card-text">{deck.description}</p>
+          <p className="card-text">{deck.description}</p>
           <Link
             to={`/decks/${deck.id}`}
             type="button"
-            class="btn btn-secondary"
+            className="btn btn-secondary"
           >
             <EyeIcon size={16} /> View
           </Link>
           <Link
             to={`/decks/${deck.id}/study`}
             type="button"
-            class="btn btn-primary"
+            className="btn btn-primary"
             style={{ marginLeft: "1%" }}
           >
             <HourglassIcon size={16} />
@@ -50,7 +50,7 @@ function DeckList() {
           </Link>
           <button
             type="button"
-            class="btn btn-danger"
+            className="btn btn-danger"
             style={{ marginLeft: "845px" }}
             onClick={() => deleteHandler(deck.id)}
           >

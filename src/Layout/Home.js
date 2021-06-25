@@ -6,7 +6,7 @@ import DeckList from "./DeckList";
 function Home() {
   return (
     <div>
-      <Link to="/decks/new" type="button" class="btn btn-secondary btn-lg">
+      <Link to="/decks/new" type="button" className="btn btn-secondary btn-lg">
         + Create Deck
       </Link>
       <div style={{ paddingTop: "1%" }}>

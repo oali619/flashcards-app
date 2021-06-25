@@ -17,49 +17,49 @@ function CreateDeck() {
   return (
     <div>
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
             <Link to="/">
               <HomeFillIcon size={16} />
               Home
             </Link>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li className="breadcrumb-item active" aria-current="page">
             Create Deck
           </li>
         </ol>
       </nav>
       <h1> Create Deck</h1>
       <form onSubmit={submitDeck}>
-        <div class="mb-3">
-          <label for="name" class="form-label">
+        <div className="mb-3">
+          <label for="name" className="form-label">
             Name
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             name="name"
             id="name"
             placeholder="Deck Name"
             required
           />
         </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">
+        <div className="mb-3">
+          <label for="description" className="form-label">
             Description
           </label>
           <textarea
-            class="form-control"
+            className="form-control"
             name="description"
             id="description"
             placeholder="Brief description of the deck"
             rows="3"
           ></textarea>
         </div>
-        <Link to="/" type="button" class="btn btn-secondary">
+        <Link to="/" type="button" className="btn btn-secondary">
           Cancel
         </Link>
-        <button class="btn btn-primary" style={{ margin: "10px" }}>
+        <button className="btn btn-primary" style={{ margin: "10px" }}>
           Submit
         </button>
       </form>
