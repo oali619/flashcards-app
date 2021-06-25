@@ -59,7 +59,7 @@ function AddCards() {
       <h2> {deck.name}: Add Card</h2>
       <form id="addCard" onSubmit={submitCard}>
         <div className="mb-3">
-          <label for="name" className="form-label">
+          <label htmlFor="name" className="form-label">
             Front
           </label>
           <textarea
@@ -72,7 +72,7 @@ function AddCards() {
           ></textarea>
         </div>
         <div className="mb-3">
-          <label for="description" className="form-label">
+          <label htmlFor="description" className="form-label">
             Back
           </label>
           <textarea

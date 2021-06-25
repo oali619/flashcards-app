@@ -32,7 +32,7 @@ function CreateDeck() {
       <h1> Create Deck</h1>
       <form onSubmit={submitDeck}>
         <div className="mb-3">
-          <label for="name" className="form-label">
+          <label htmlFor="name" className="form-label">
             Name
           </label>
           <input
@@ -45,7 +45,7 @@ function CreateDeck() {
           />
         </div>
         <div className="mb-3">
-          <label for="description" className="form-label">
+          <label htmlFor="description" className="form-label">
             Description
           </label>
           <textarea

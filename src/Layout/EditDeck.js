@@ -59,20 +59,22 @@ function EditDeck() {
           <h1>Edit Deck</h1>
           <form onSubmit={updatedDeck}>
             <div className="mb-3">
-              <label hmtlFor="name" className="form-label">
+              <label htmlFor="name" className="form-label">
                 Name
               </label>
-              {/* <input
-            type="text"
-            className="form-control"
-            name="name"
-            id="name"
-            placeholder="Deck Name"
-            required
-          >{deck.name}</input> */}
-              <textarea className="form-control" name="name" id="name" rows="3">
-                {deck.name}
-              </textarea>
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                id="name"
+                placeholder="Deck Name"
+                defaultValue={deck.name}
+                required
+              />
+
+              {/* <textarea className="form-control" name="name" id="name" rows="3">
+                {deck.name} */}
+              {/* </textarea> */}
             </div>
             <div className="mb-3">
               <label htmlFor="description" className="form-label">
@@ -83,9 +85,8 @@ function EditDeck() {
                 name="description"
                 id="description"
                 rows="3"
-              >
-                {deck.description}
-              </textarea>
+                defaultValue={deck.description}
+              ></textarea>
             </div>
             <Link
               to={`/decks/${deckId}`}

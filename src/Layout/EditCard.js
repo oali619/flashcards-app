@@ -80,10 +80,9 @@ function EditCard() {
             name="front"
             id="front"
             rows="3"
+            value={cardFront}
             onChange={(e) => setCardFront(e.target.value)}
-          >
-            {cardFront}
-          </textarea>
+          ></textarea>
         </div>
         <div className="mb-3">
           <label htmlFor="description" className="form-label">
@@ -94,10 +93,9 @@ function EditCard() {
             name="back"
             id="back"
             rows="3"
+            value={cardBack}
             onChange={(e) => setCardBack(e.target.value)}
-          >
-            {cardBack}
-          </textarea>
+          ></textarea>
         </div>
         <Link
           to={`/decks/${deckId}`}
