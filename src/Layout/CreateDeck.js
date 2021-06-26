@@ -11,9 +11,14 @@ function CreateDeck() {
       name: e.target.name.value,
       description: e.target.description.value,
     };
-    const newDeck = await createDeck(deck);
-    history.push(`/decks/${newDeck.id}`);
+    try {
+      const newDeck = await createDeck(deck);
+      history.push(`/decks/${newDeck.id}`);
+    } catch (error) {
+      console.log(error);
+    }
   }
+
   return (
     <div>
       <nav aria-label="breadcrumb">
@@ -59,7 +64,11 @@ function CreateDeck() {
         <Link to="/" type="button" className="btn btn-secondary">
           Cancel
         </Link>
-        <button className="btn btn-primary" style={{ margin: "10px" }}>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          style={{ margin: "10px" }}
+        >
           Submit
         </button>
       </form>

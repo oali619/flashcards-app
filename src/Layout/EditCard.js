@@ -15,26 +15,29 @@ function EditCard() {
   useEffect(() => {
     const abortController = new AbortController();
     getDeck(deckId, abortController);
-    return () => abortController.abort();
-  }, [deckId]);
-
-  async function getDeck(deckId, abortController) {
-    let response = await readDeck(deckId, abortController.signal);
-    setDeck(response);
-  }
-
-  useEffect(() => {
-    const abortController = new AbortController();
     getCard(cardId, abortController);
     return () => abortController.abort();
-  }, [cardId]);
+  }, []);
+
+  async function getDeck(deckId, abortController) {
+    try {
+      let response = await readDeck(deckId, abortController.signal);
+      setDeck(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function getCard(cardId, abortController) {
-    setCardLoading(true);
-    const { front, back } = await readCard(cardId, abortController.signal);
-    setCardFront(front);
-    setCardBack(back);
-    setCardLoading(false);
+    try {
+      setCardLoading(true);
+      const { front, back } = await readCard(cardId, abortController.signal);
+      setCardFront(front);
+      setCardBack(back);
+      setCardLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function submitCard(e) {
@@ -45,8 +48,12 @@ function EditCard() {
       front: cardFront,
       back: cardBack,
     };
-    await updateCard(card);
-    history.push(`/decks/${deckId}`);
+    try {
+      await updateCard(card);
+      history.push(`/decks/${deckId}`);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   if (cardLoading) return <p>Loading...</p>;

@@ -16,8 +16,12 @@ function AddCards() {
   }, [deckId]);
 
   async function getDeck(deckId, abortController) {
-    let response = await readDeck(deckId, abortController.signal);
-    setDeck(response);
+    try {
+      let response = await readDeck(deckId, abortController.signal);
+      setDeck(response);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async function submitCard(e) {

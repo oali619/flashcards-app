@@ -15,8 +15,12 @@ function EditDeck() {
   }, [deckId]);
 
   async function getDeck(deckId, abortController) {
-    let response = await readDeck(deckId, abortController.signal);
-    setDeck(response);
+    try {
+      const response = await readDeck(deckId, abortController.signal);
+      setDeck(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function updatedDeck(e) {

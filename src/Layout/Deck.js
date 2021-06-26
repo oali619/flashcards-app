@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { readDeck, deleteDeck, deleteCard } from "../utils/api/index";
 import {
   HomeFillIcon,
@@ -9,26 +9,30 @@ import {
 } from "@primer/octicons-react";
 
 function Deck() {
+  const history = useHistory();
   const [deck, setDeck] = useState();
   const { deckId } = useParams();
 
   useEffect(() => {
-    console.log("fetching deck");
     const abortController = new AbortController();
     getDeck(deckId, abortController);
     return () => abortController.abort();
   }, [deckId]);
 
   async function getDeck(deckId, abortController) {
-    let response = await readDeck(deckId, abortController.signal);
-    setDeck(response);
+    try {
+      let response = await readDeck(deckId, abortController.signal);
+      setDeck(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function deleteHandler(id) {
     if (window.confirm("Are you sure you want to delete this deck?")) {
       try {
         await deleteDeck(id);
-        window.location.reload();
+        history.push(`/decks/`);
       } catch (error) {
         console.log(error);
       }
@@ -111,37 +115,40 @@ function Deck() {
               </div>
             </div>
           </div>
-
-          <h1 style={{ paddingTop: "20px", fontSize: "54px" }}>Cards</h1>
-          <div>
-            {deck.cards.map((card) => (
-              <div
-                key={card.id}
-                className="d-flex justify-content-between border"
-              >
-                <div>
-                  <p className="fs-2">{card.front}</p>
-                </div>
-                <div>
-                  <p style={{ fontSize: "24px" }}>{card.back}</p>
-                  <Link
-                    to={`/decks/${deck.id}/cards/${card.id}/edit`}
-                    type="button"
-                    className="btn btn-secondary"
+          {deck.cards.length > 0 && (
+            <div>
+              <h1 style={{ paddingTop: "20px", fontSize: "54px" }}>Cards</h1>
+              <div>
+                {deck.cards.map((card) => (
+                  <div
+                    key={card.id}
+                    className="d-flex justify-content-between border"
                   >
-                    <PencilIcon size={32} /> Edit
-                  </Link>
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={async () => await deleteCardHandler(card.id)}
-                  >
-                    <TrashIcon size={32} />
-                  </button>
-                </div>
+                    <div>
+                      <p className="fs-2">{card.front}</p>
+                    </div>
+                    <div>
+                      <p style={{ fontSize: "24px" }}>{card.back}</p>
+                      <Link
+                        to={`/decks/${deck.id}/cards/${card.id}/edit`}
+                        type="button"
+                        className="btn btn-secondary"
+                      >
+                        <PencilIcon size={32} /> Edit
+                      </Link>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={async () => await deleteCardHandler(card.id)}
+                      >
+                        <TrashIcon size={32} />
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
       )}
     </div>

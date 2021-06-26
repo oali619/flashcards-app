@@ -15,14 +15,16 @@ function StudyDeck() {
   useEffect(() => {
     const abortController = new AbortController();
     getDeck(deckId, abortController);
-    return () => {
-      abortController.abort();
-    };
+    return () => abortController.abort();
   }, [deckId]);
 
   async function getDeck(deckId, abortController) {
-    let response = await readDeck(deckId, abortController.signal);
-    setDeck(response);
+    try {
+      const response = await readDeck(deckId, abortController.signal);
+      setDeck(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   if (Object.keys(deck).length === 0) return null;
@@ -86,8 +88,6 @@ function StudyDeck() {
             You need at least 3 cards to study. There are {deck.cards.length}
             cards in this deck.
           </p>
-
-          {/* <Buttons names={["add-card"]} deckId={id} /> */}
         </div>
       )}
     </div>
