@@ -140,37 +140,6 @@ function Deck() {
                   </button>
                 </div>
               </div>
-
-              // <div className="row">
-              //   <div className="col-sm-6">
-              //     <div className="card">
-              //       <div className="card-body">
-              //         <p className="card-text">{card.front}</p>
-              //       </div>
-              //     </div>
-              //   </div>
-              //   <div className="col-sm-6">
-              //     <div className="card">
-              //       <div className="card-body">
-              //         <p className="card-text">{card.back}</p>
-              //         <Link
-              //           to={`/decks/${deck.id}/cards/${card.id}/edit`}
-              //           type="button"
-              //           className="btn btn-secondary"
-              //         >
-              //           <PencilIcon size={16} /> Edit
-              //         </Link>
-              //         <button
-              //           type="button"
-              //           className="btn btn-danger"
-              //           onClick={async () => await deleteCardHandler(card.id)}
-              //         >
-              //           <TrashIcon size={16} />
-              //         </button>
-              //       </div>
-              //     </div>
-              //   </div>
-              // </div>
             ))}
           </div>
         </div>

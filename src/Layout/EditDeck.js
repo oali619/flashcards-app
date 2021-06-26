@@ -71,10 +71,6 @@ function EditDeck() {
                 defaultValue={deck.name}
                 required
               />
-
-              {/* <textarea className="form-control" name="name" id="name" rows="3">
-                {deck.name} */}
-              {/* </textarea> */}
             </div>
             <div className="mb-3">
               <label htmlFor="description" className="form-label">

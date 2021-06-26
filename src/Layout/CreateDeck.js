@@ -45,7 +45,7 @@ function CreateDeck() {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="description" className="form-label">
+          <label htmlor="description" className="form-label">
             Description
           </label>
           <textarea
