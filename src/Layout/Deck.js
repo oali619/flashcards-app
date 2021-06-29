@@ -4,6 +4,7 @@ import { readDeck, deleteDeck, deleteCard } from "../utils/api/index";
 import {
   HomeFillIcon,
   PencilIcon,
+  PlusIcon,
   HourglassIcon,
   TrashIcon,
 } from "@primer/octicons-react";
@@ -77,76 +78,88 @@ function Deck() {
                 {deck.cards.length} cards
               </h6>
               <p className="card-text">{deck.description}</p>
-              <div className="d-flex justify-content-between">
-                <div className="d-flex">
-                  <Link
-                    to={`/decks/${deck.id}/edit`}
-                    type="button"
-                    className="btn btn-secondary"
-                  >
-                    <PencilIcon size={32} /> Edit
-                  </Link>
-                  <Link
-                    to={`/decks/${deck.id}/study`}
-                    type="button"
-                    className="btn btn-primary"
-                    style={{ marginLeft: "1%" }}
-                  >
-                    <HourglassIcon size={32} />
-                    Study
-                  </Link>
-                  <Link
-                    to={`/decks/${deck.id}/cards/new`}
-                    type="button"
-                    className="btn btn-primary"
-                    style={{ marginLeft: "1%" }}
-                  >
-                    + Add Cards
-                  </Link>
-                </div>
+
+              <div>
+                <Link
+                  to={`/decks/${deck.id}/edit`}
+                  type="button"
+                  className="btn btn-secondary"
+                >
+                  <PencilIcon size={16} /> Edit
+                </Link>
+                <Link
+                  to={`/decks/${deck.id}/study`}
+                  type="button"
+                  className="btn btn-primary"
+                  style={{ marginLeft: "1%" }}
+                >
+                  <HourglassIcon size={16} />
+                  Study
+                </Link>
+                <Link
+                  to={`/decks/${deck.id}/cards/new`}
+                  type="button"
+                  className="btn btn-primary"
+                  style={{ marginLeft: "1%" }}
+                >
+                  <PlusIcon size={16} />
+                  Add Cards
+                </Link>
+
                 <button
                   type="button"
                   className="btn btn-danger"
-                  // style={{ marginLeft: "705px" }}
+                  style={{ float: "right" }}
                   onClick={() => deleteHandler(deckId)}
                 >
-                  <TrashIcon size={32} />
+                  <TrashIcon size={16} />
                 </button>
               </div>
             </div>
           </div>
+
           {deck.cards.length > 0 && (
             <div>
               <h1 style={{ paddingTop: "20px", fontSize: "54px" }}>Cards</h1>
-              <div>
-                {deck.cards.map((card) => (
-                  <div
-                    key={card.id}
-                    className="d-flex justify-content-between border"
-                  >
-                    <div>
-                      <p className="fs-2">{card.front}</p>
+
+              {deck.cards.map((card) => (
+                <div key={card.id}>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body" style={{ height: "125px" }}>
+                          <p class="card-text">{card.front}</p>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <p style={{ fontSize: "24px" }}>{card.back}</p>
-                      <Link
-                        to={`/decks/${deck.id}/cards/${card.id}/edit`}
-                        type="button"
-                        className="btn btn-secondary"
-                      >
-                        <PencilIcon size={32} /> Edit
-                      </Link>
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        onClick={async () => await deleteCardHandler(card.id)}
-                      >
-                        <TrashIcon size={32} />
-                      </button>
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body" style={{ height: "125px" }}>
+                          <p class="card-text">{card.back}</p>
+                          <Link
+                            to={`/decks/${deck.id}/cards/${card.id}/edit`}
+                            type="button"
+                            className="btn btn-secondary"
+                            style={{ float: "right" }}
+                          >
+                            <PencilIcon size={16} /> Edit
+                          </Link>
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            style={{ float: "right", marginRight: "1%" }}
+                            onClick={async () =>
+                              await deleteCardHandler(card.id)
+                            }
+                          >
+                            <TrashIcon size={16} />
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           )}
         </div>

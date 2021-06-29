@@ -41,18 +41,6 @@
       "back": "Not at all! State is visible to the component only.",
       "deckId": 1,
       "id": 7
-    },
-    {
-      "deckId": 1,
-      "id": 8,
-      "front": "YOO v4",
-      "back": "yoooo"
-    },
-    {
-      "id": 9,
-      "front": "YO v2",
-      "back": "Yo",
-      "deckId": 1
     }
   ]
 }
