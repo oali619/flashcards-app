@@ -13,7 +13,7 @@ import React from "react";
  */
 function FlashCard({ deck, cardNumber, flipped, flip, next }) {
   return (
-    <div className="card mt-2" id={`card-${deck.id}`}>
+    <div className="card rounded mt-2" id={`card-${deck.id}`}>
       <div className="card-body">
         <h4 className="card-title">
           Card {cardNumber + 1} of {deck.cards.length}

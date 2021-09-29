@@ -71,7 +71,7 @@ function Deck() {
             </ol>
           </nav>
 
-          <div className="card" style={{ width: "auto" }}>
+          <div className="card rounded" style={{ width: "auto" }}>
             <div className="card-body">
               <h5 className="card-title">{deck.name}</h5>
               <h6 className="card-subtitle mb-2 text-muted">
@@ -124,18 +124,18 @@ function Deck() {
 
               {deck.cards.map((card) => (
                 <div key={card.id}>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="card">
-                        <div class="card-body" style={{ height: "125px" }}>
-                          <p class="card-text">{card.front}</p>
+                  <div className="row">
+                    <div className="col-sm-6">
+                      <div className="card rounded">
+                        <div className="card-body" style={{ height: "125px" }}>
+                          <p className="card-text">{card.front}</p>
                         </div>
                       </div>
                     </div>
-                    <div class="col-sm-6">
-                      <div class="card">
-                        <div class="card-body" style={{ height: "125px" }}>
-                          <p class="card-text">{card.back}</p>
+                    <div className="col-sm-6">
+                      <div className="card">
+                        <div className="card-body" style={{ height: "125px" }}>
+                          <p className="card-text">{card.back}</p>
                           <Link
                             to={`/decks/${deck.id}/cards/${card.id}/edit`}
                             type="button"
